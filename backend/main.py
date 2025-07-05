@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 from google.transit import gtfs_realtime_pb2
 
+
 app = FastAPI()
 
 # Enable frontend access
@@ -65,3 +66,6 @@ def arrivals(station: str = Query(...)):
 @app.get("/stations")
 def stations():
     return sorted(stops_df['stop_name'].unique().tolist())
+
+from routes_api import router as routes_router
+app.include_router(routes_router)
